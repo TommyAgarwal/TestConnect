@@ -126,6 +126,15 @@
   padding-bottom: 8px;
 }
 
+@media (max-width: 767px) {
+  .region-content {
+    gap: 24px;
+  }
+  .region-footer {
+    padding-bottom: 0;
+  }
+}
+
 /* Button style overrides for disabled state */
 .continue-button {
   transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);

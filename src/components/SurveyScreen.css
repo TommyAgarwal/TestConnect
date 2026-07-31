@@ -182,6 +182,16 @@
   padding-bottom: 8px;
 }
 
+@media (max-width: 767px) {
+  .survey-content {
+    gap: 20px;
+  }
+  .survey-footer {
+    margin-top: auto;
+    padding-bottom: 0;
+  }
+}
+
 .submit-responses-btn:active {
   transform: scale(0.92);
 }

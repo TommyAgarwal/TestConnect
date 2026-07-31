@@ -49,6 +49,15 @@
   padding-bottom: 8px;
 }
 
+@media (max-width: 767px) {
+  .survey-prompt-screen {
+    padding: 32px 24px;
+  }
+  .survey-prompt-footer {
+    padding-bottom: 0;
+  }
+}
+
 .yes-button {
   width: 300px;
   height: 52px;

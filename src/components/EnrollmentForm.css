@@ -115,6 +115,16 @@
   padding-bottom: 8px;
 }
 
+@media (max-width: 767px) {
+  .enrollment-content {
+    gap: 20px;
+  }
+  .enrollment-footer {
+    margin-top: auto;
+    padding-bottom: 0;
+  }
+}
+
 .disclaimer-text {
   font-family: var(--font-sans);
   font-size: 12px;

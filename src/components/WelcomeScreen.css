@@ -68,3 +68,15 @@
   margin-top: auto;
   padding-bottom: 8px;
 }
+
+@media (max-width: 767px) {
+  .welcome-screen {
+    padding: 32px 24px;
+  }
+  .welcome-content {
+    gap: 24px;
+  }
+  .welcome-footer {
+    padding-bottom: 0;
+  }
+}

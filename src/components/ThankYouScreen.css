@@ -47,6 +47,15 @@
   padding-bottom: 8px;
 }
 
+@media (max-width: 767px) {
+  .thank-you-screen {
+    padding: 32px 24px;
+  }
+  .thank-you-footer {
+    padding-bottom: 0;
+  }
+}
+
 .run-again-link {
   background: none;
   border: none;

@@ -1,0 +1,53 @@
+.loading-screen {
+  background-color: #f2f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 309px;
+}
+
+.loading-text {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.loading-progress-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.loading-progress-track {
+  background-color: #d9d9d9;
+  height: 4px;
+  border-radius: 16px;
+  width: 241px;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  background-color: #041e3a;
+  height: 100%;
+  border-radius: 16px;
+  width: 0%;
+  transition: width 3s linear;
+}
+
+.loading-progress-fill.active {
+  width: 100%;
+}

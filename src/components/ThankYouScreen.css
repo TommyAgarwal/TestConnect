@@ -1,0 +1,68 @@
+.thank-you-screen {
+  background-color: #f2f3f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+  padding: 64px 24px 32px 24px;
+  box-sizing: border-box;
+}
+
+.thank-you-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.thank-you-title {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 48px;
+  color: var(--primary-brand);
+  line-height: 1.2;
+}
+
+.thank-you-message {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--secondary-text);
+  line-height: 1.5;
+  max-width: 273px;
+}
+
+.thank-you-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  margin-top: auto;
+  padding-bottom: 8px;
+}
+
+.run-again-link {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.run-again-link:hover {
+  color: var(--primary-brand);
+}
+
+.run-again-link:active {
+  transform: scale(0.92);
+}

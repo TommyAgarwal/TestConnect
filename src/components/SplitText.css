@@ -1,0 +1,24 @@
+.split-text-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+}
+
+.split-line-wrapper {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+
+.split-line {
+  display: block;
+  transform: translateY(105%);
+  animation: splitRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splitRevealUp {
+  to {
+    transform: translateY(0);
+  }
+}

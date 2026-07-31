@@ -1,0 +1,139 @@
+:root {
+  --primary-brand: #041e3a;
+  --primary-text: #000000;
+  --secondary-text: #6e6f72;
+  --bg-color: #ffffff;
+  --app-bg: #f2f3f5;
+  --border-color: #c6c7cb;
+  
+  --font-serif: 'Oranienbaum', serif;
+  --font-sans: 'Schibsted Grotesk', sans-serif;
+  
+  --width: 393px;
+  --height: 852px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: var(--font-sans);
+  color: var(--primary-text);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Responsive mobile-first container that fills the screen */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Scrollable screen container */
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar styles to keep them sleek and premium */
+.screen::-webkit-scrollbar {
+  width: 4px;
+}
+.screen::-webkit-scrollbar-track {
+  background: transparent;
+}
+.screen::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.screen::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Custom interactive classes & animations */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-brand);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  width: 300px;
+  height: 52px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background-color: #0b2b4d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(4, 30, 58, 0.15);
+}
+
+.btn-primary:active {
+  transform: scale(0.92);
+  box-shadow: none;
+}
+
+/* Base button and field transition speeds */
+.btn-primary, .btn-secondary, input, select {
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Screen Transitions (Fade + Blur) */
+.screen-transition {
+  animation: fadeBlurIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeBlurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Reveal-in from bottom for buttons, fields, lists */
+.reveal-in {
+  opacity: 0;
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

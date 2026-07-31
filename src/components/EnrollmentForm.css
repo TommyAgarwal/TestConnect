@@ -1,0 +1,130 @@
+.enrollment-screen {
+  background-color: #f2f3f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+  padding: 32px 24px 32px 24px;
+  box-sizing: border-box;
+}
+
+.enrollment-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.enrollment-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  flex: 1;
+}
+
+.enrollment-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 100%;
+  flex: 1;
+}
+
+.enrollment-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.enrollment-title {
+  font-family: var(--font-sans);
+  font-weight: normal;
+  font-size: 32px;
+  color: var(--primary-brand);
+  line-height: 1.2;
+}
+
+.enrollment-subtitle {
+  font-family: var(--font-sans);
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--secondary-text);
+  line-height: 1.4;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.input-field-wrapper,
+.select-field-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid var(--secondary-text);
+  box-sizing: border-box;
+}
+
+.input-field-wrapper input,
+.select-field-wrapper select {
+  width: 100%;
+  padding: 20px 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--primary-text);
+  border: none;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-field-wrapper input::placeholder {
+  color: var(--secondary-text);
+}
+
+.select-field-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-caret {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.enrollment-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 40px;
+  padding-bottom: 8px;
+}
+
+.disclaimer-text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--secondary-text);
+  text-align: center;
+}
+
+/* Error highlight classes */
+.input-field-wrapper.error,
+.select-field-wrapper.error {
+  border-color: #d93025;
+  box-shadow: 0 0 0 1px #d93025;
+}

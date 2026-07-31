@@ -1,0 +1,157 @@
+.success-screen {
+  background-color: #f2f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.coupon-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 345px;
+  padding: 32px 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.coupon-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.coupon-brand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 120px;
+}
+
+.coupon-welcome {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: #000000;
+  text-align: center;
+}
+
+.coupon-logo-box {
+  border: 1px solid var(--primary-brand);
+  padding: 6px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.coupon-logo-text {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--primary-brand);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.coupon-banner {
+  background-color: var(--primary-brand);
+  color: #ffffff;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.banner-take {
+  font-family: var(--font-serif);
+  font-size: 16px;
+}
+
+.banner-discount {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  line-height: 1;
+}
+
+.banner-terms {
+  font-family: var(--font-serif);
+  font-size: 16px;
+}
+
+.coupon-expiry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.expiry-title {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--primary-brand);
+  letter-spacing: 0.05em;
+}
+
+.expiry-date {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--primary-brand);
+  font-weight: 500;
+}
+
+.barcode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.barcode-lines {
+  display: flex;
+  align-items: stretch;
+  height: 48px;
+  background-color: #ffffff;
+}
+
+.barcode-bar {
+  background-color: #000000;
+  display: inline-block;
+  height: 100%;
+}
+
+.barcode-code {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 0.1em;
+}
+
+.wallet-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wallet-badge-wrapper:active {
+  transform: scale(0.92);
+}
+
+.google-wallet-btn {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+

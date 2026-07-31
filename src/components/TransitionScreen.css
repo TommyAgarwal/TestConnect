@@ -1,0 +1,48 @@
+.transition-screen {
+  background-color: #041e3a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.transition-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 251px;
+}
+
+.transition-welcome {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.transition-brand-border {
+  border: 1px solid #ffffff;
+  padding: 8px 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.transition-brand-text {
+  font-family: var(--font-serif);
+  font-size: 32px; /* Emulates a premium scale relative to the bounding box */
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
+}

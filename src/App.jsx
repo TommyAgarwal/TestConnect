@@ -26,6 +26,15 @@ export default function App() {
     }, 180);
   };
 
+  // Reset scroll position on step change
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+    const scrollContainers = document.querySelectorAll('.screen-transition');
+    scrollContainers.forEach(el => {
+      el.scrollTop = 0;
+    });
+  }, [step]);
+
   // Start timer and move to the intermediate Transition Screen
   const handleStart = () => {
     setStartTime(performance.now());

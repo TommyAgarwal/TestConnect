@@ -24,16 +24,19 @@ body {
   font-family: var(--font-sans);
   color: var(--primary-text);
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
 }
 
 /* Responsive mobile-first container that fills the screen */
 .app-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
 
 /* Scrollable screen container */
@@ -103,9 +106,12 @@ body {
 .screen-transition {
   animation: fadeBlurIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   width: 100%;
+  height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes fadeBlurIn {

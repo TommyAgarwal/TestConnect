@@ -22,6 +22,16 @@ export default function LoadingScreen({ onComplete }) {
     };
   }, [onComplete]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        onComplete();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onComplete]);
+
   return (
     <div className="loading-screen screen-transition" data-node-id="1:115">
       <div className="loading-box" data-node-id="1:140">

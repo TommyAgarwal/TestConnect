@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SplitText from './SplitText';
 import './RegionSelect.css';
 
@@ -11,6 +11,16 @@ const CaretLeftIcon = () => (
 
 export default function RegionSelect({ selectedRegion, onSelectRegion, onBack, onContinue, progress }) {
   const isContinueEnabled = !!selectedRegion;
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && isContinueEnabled) {
+        onContinue();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onContinue, isContinueEnabled]);
 
   return (
     <div className="region-select-screen screen-transition" data-node-id="1:22">

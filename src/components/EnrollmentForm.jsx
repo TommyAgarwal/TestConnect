@@ -307,6 +307,22 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
     onFieldsChange(filledCount);
   }, [firstName, lastName, email, rawPhoneDigits, zip, birthMonth, fullName, country, isUSA]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        if (isFormValid()) {
+          e.preventDefault();
+          const data = isUSA 
+            ? { firstName, lastName, email, phone, zip, birthMonth }
+            : { fullName, email, country };
+          onSubmit(data);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFormValid, isUSA, firstName, lastName, email, phone, zip, birthMonth, fullName, country, onSubmit]);
+
   // Phone input formatting logic
   const handlePhoneInput = (e) => {
     const rawInput = e.target.value;
@@ -387,7 +403,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
               <SplitText text="Tell us about yourself" delay={100} />
             </h1>
             <p className="enrollment-subtitle reveal-in" style={{ '--delay': '200ms' }}>
-              Enter your information to receive exclusive offers, early access to new arrivals, a birthday surprise, and more from Test Connect
+              Enter your information to receive exclusive offers, early access to new arrivals, a birthday surprise, and more from Polo Connect
             </p>
           </div>
 

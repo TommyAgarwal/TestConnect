@@ -223,6 +223,15 @@ const MONTHS = [
 export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChange, progress }) {
   const isUSA = region === 'USA';
 
+  const firstNameRef = React.useRef(null);
+  const lastNameRef = React.useRef(null);
+  const emailRef = React.useRef(null);
+  const phoneRef = React.useRef(null);
+  const zipRef = React.useRef(null);
+  const birthMonthRef = React.useRef(null);
+  const fullNameRef = React.useRef(null);
+  const countryRef = React.useRef(null);
+
   // Fields state
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -316,6 +325,53 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
             ? { firstName, lastName, email, phone, zip, birthMonth }
             : { fullName, email, country };
           onSubmit(data);
+        }
+        return;
+      }
+
+      // Allow selecting/focusing fields via number keys if user is not actively typing in an input
+      const activeTag = document.activeElement?.tagName;
+      const isTyping = activeTag === 'INPUT' || activeTag === 'TEXTAREA';
+
+      if (!isTyping) {
+        if (isUSA) {
+          if (e.key === '1' && firstNameRef.current) {
+            e.preventDefault();
+            firstNameRef.current.focus();
+            firstNameRef.current.select?.();
+          } else if (e.key === '2' && lastNameRef.current) {
+            e.preventDefault();
+            lastNameRef.current.focus();
+            lastNameRef.current.select?.();
+          } else if (e.key === '3' && emailRef.current) {
+            e.preventDefault();
+            emailRef.current.focus();
+            emailRef.current.select?.();
+          } else if (e.key === '4' && phoneRef.current) {
+            e.preventDefault();
+            phoneRef.current.focus();
+            phoneRef.current.select?.();
+          } else if (e.key === '5' && zipRef.current) {
+            e.preventDefault();
+            zipRef.current.focus();
+            zipRef.current.select?.();
+          } else if (e.key === '6' && birthMonthRef.current) {
+            e.preventDefault();
+            birthMonthRef.current.focus();
+          }
+        } else {
+          if (e.key === '1' && fullNameRef.current) {
+            e.preventDefault();
+            fullNameRef.current.focus();
+            fullNameRef.current.select?.();
+          } else if (e.key === '2' && emailRef.current) {
+            e.preventDefault();
+            emailRef.current.focus();
+            emailRef.current.select?.();
+          } else if (e.key === '3' && countryRef.current) {
+            e.preventDefault();
+            countryRef.current.focus();
+          }
         }
       }
     };
@@ -412,6 +468,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
               <>
                 <div className={`input-field-wrapper ${isFieldInvalid('firstName', firstName) ? 'error' : ''}`}>
                   <input 
+                    ref={firstNameRef}
                     type="text" 
                     placeholder="*First Name" 
                     value={firstName} 
@@ -424,6 +481,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('lastName', lastName) ? 'error' : ''}`}>
                   <input 
+                    ref={lastNameRef}
                     type="text" 
                     placeholder="*Last Name" 
                     value={lastName} 
@@ -436,6 +494,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('email', email) ? 'error' : ''}`}>
                   <input 
+                    ref={emailRef}
                     type="email" 
                     placeholder="*Email Address" 
                     value={email} 
@@ -448,6 +507,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('phone', phone) ? 'error' : ''}`}>
                   <input 
+                    ref={phoneRef}
                     type="tel" 
                     placeholder="*Phone Number" 
                     value={phone} 
@@ -460,6 +520,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('zip', zip) ? 'error' : ''}`}>
                   <input 
+                    ref={zipRef}
                     type="text" 
                     placeholder="*Zipcode" 
                     value={zip} 
@@ -472,6 +533,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`select-field-wrapper ${isFieldInvalid('birthMonth', birthMonth) ? 'error' : ''}`}>
                   <select 
+                    ref={birthMonthRef}
                     value={birthMonth} 
                     onChange={(e) => setBirthMonth(e.target.value)}
                     onBlur={() => handleBlur('birthMonth')}
@@ -491,6 +553,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
               <>
                 <div className={`input-field-wrapper ${isFieldInvalid('fullName', fullName) ? 'error' : ''}`}>
                   <input 
+                    ref={fullNameRef}
                     type="text" 
                     placeholder="*Full Name" 
                     value={fullName} 
@@ -503,6 +566,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('email', email) ? 'error' : ''}`}>
                   <input 
+                    ref={emailRef}
                     type="email" 
                     placeholder="*Email Address" 
                     value={email} 
@@ -515,6 +579,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                 </div>
                 <div className={`select-field-wrapper ${isFieldInvalid('country', country) ? 'error' : ''}`}>
                   <select 
+                    ref={countryRef}
                     value={country} 
                     onChange={(e) => setCountry(e.target.value)}
                     onBlur={() => handleBlur('country')}

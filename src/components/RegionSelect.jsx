@@ -14,13 +14,17 @@ export default function RegionSelect({ selectedRegion, onSelectRegion, onBack, o
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Enter' && isContinueEnabled) {
+      if (e.key === '1') {
+        onSelectRegion('USA');
+      } else if (e.key === '2') {
+        onSelectRegion('International');
+      } else if (e.key === 'Enter' && isContinueEnabled) {
         onContinue();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onContinue, isContinueEnabled]);
+  }, [onSelectRegion, onContinue, isContinueEnabled]);
 
   return (
     <div className="region-select-screen screen-transition" data-node-id="1:22">

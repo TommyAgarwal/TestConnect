@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SplitText from './SplitText';
 import './TakeSurveyPrompt.css';
 
 export default function TakeSurveyPrompt({ onAccept, onDecline }) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        onAccept();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onAccept]);
-
   return (
     <div className="survey-prompt-screen screen-transition" data-node-id="4:3683">
       {/* Centered Content */}

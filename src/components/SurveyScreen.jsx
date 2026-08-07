@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SplitText from './SplitText';
 import './SurveyScreen.css';
 
@@ -14,23 +14,6 @@ export default function SurveyScreen({ onBack, onSubmit }) {
   const [language, setLanguage] = useState(null);
   const [confusion, setConfusion] = useState('');
   const [feedback, setFeedback] = useState('');
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        onSubmit({
-          ease: ease || 'N/A',
-          confidence: confidence || 'N/A',
-          language: language || 'N/A',
-          confusion: confusion.trim() || 'N/A',
-          feedback: feedback.trim() || 'N/A',
-        });
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onSubmit, ease, confidence, language, confusion, feedback]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

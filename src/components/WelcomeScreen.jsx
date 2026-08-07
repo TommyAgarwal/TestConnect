@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SplitText from './SplitText';
 import './WelcomeScreen.css';
 
 export default function WelcomeScreen({ onStart }) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        onStart();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onStart]);
   return (
     <div className="welcome-screen screen-transition" data-node-id="1:9">
       {/* Content wrapper with top padding */}

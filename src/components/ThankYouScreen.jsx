@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SplitText from './SplitText';
 import './ThankYouScreen.css';
 
 export default function ThankYouScreen({ onReset }) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        onReset();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onReset]);
-
   return (
     <div className="thank-you-screen screen-transition" data-node-id="4:3751">
       {/* Centered content */}

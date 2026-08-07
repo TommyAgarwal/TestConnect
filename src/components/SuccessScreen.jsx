@@ -17,16 +17,6 @@ export default function SuccessScreen({ onComplete }) {
     return () => clearTimeout(timer);
   }, [onComplete]);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        onComplete();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onComplete]);
-
   return (
     <div className="success-screen screen-transition" data-node-id="4:3445">
       <div className="coupon-card reveal-in" style={{ '--delay': '100ms' }} data-node-id="4:3446">
@@ -36,7 +26,7 @@ export default function SuccessScreen({ onComplete }) {
           <div className="coupon-brand-group" data-node-id="4:3450">
             <span className="coupon-welcome" data-node-id="4:3451">Welcome to</span>
             <div className="coupon-logo-box" data-node-id="4:3452">
-              <span className="coupon-logo-text" data-node-id="4:3453">POLO CONNECT</span>
+              <span className="coupon-logo-text" data-node-id="4:3453">TEST CONNECT</span>
             </div>
           </div>
           

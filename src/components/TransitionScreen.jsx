@@ -14,16 +14,6 @@ export default function TransitionScreen({ onComplete }) {
     return () => clearTimeout(timer);
   }, [onComplete]);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        onComplete();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onComplete]);
-
   return (
     <div className="transition-screen screen-transition" data-node-id="1:15">
       <div className="transition-box" data-node-id="1:16">
@@ -32,7 +22,7 @@ export default function TransitionScreen({ onComplete }) {
         </p>
         <div className="transition-brand-border reveal-in" style={{ '--delay': '400ms' }} data-node-id="1:18">
           <p className="transition-brand-text" data-node-id="1:19">
-            POLO CONNECT
+            TEST CONNECT
           </p>
         </div>
       </div>

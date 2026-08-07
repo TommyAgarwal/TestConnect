@@ -601,9 +601,6 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
 
         {/* Footer Actions */}
         <div className="enrollment-footer reveal-in" style={{ '--delay': '650ms' }}>
-          <p className="disclaimer-text">
-            This information will not be used or stored
-          </p>
           <button 
             type="submit" 
             className={`btn-primary continue-button ${isFormValid() ? 'active' : 'disabled'}`}

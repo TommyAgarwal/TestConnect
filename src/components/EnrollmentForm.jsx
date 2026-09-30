@@ -253,8 +253,6 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
         return value.trim().length === 0;
       case 'email':
         return !isEmailValid(value);
-      case 'phone':
-        return rawPhoneDigits.length < 10;
       case 'zip':
         return value.trim().length < 5;
       case 'country':
@@ -272,7 +270,6 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
         firstName.trim().length > 0 &&
         lastName.trim().length > 0 &&
         isEmailValid(email) &&
-        rawPhoneDigits.length === 10 &&
         zip.trim().length === 5 &&
         birthMonth !== ''
       );
@@ -289,14 +286,13 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
     setTouched(prev => ({ ...prev, [field]: true }));
   };
 
-  // Update parent on fields progress changes (USA has 6 fields, Intl has 3)
+  // Update parent on fields progress changes (USA has 5 fields, Intl has 3)
   useEffect(() => {
     let filledCount = 0;
     if (isUSA) {
       if (firstName.trim()) filledCount++;
       if (lastName.trim()) filledCount++;
       if (isEmailValid(email)) filledCount++;
-      if (rawPhoneDigits.length === 10) filledCount++;
       if (zip.trim().length === 5) filledCount++;
       if (birthMonth !== '') filledCount++;
     } else {
@@ -305,47 +301,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
       if (country) filledCount++;
     }
     onFieldsChange(filledCount);
-  }, [firstName, lastName, email, rawPhoneDigits, zip, birthMonth, fullName, country, isUSA]);
-
-  // Phone input formatting logic
-  const handlePhoneInput = (e) => {
-    const rawInput = e.target.value;
-    const isDeleting = e.nativeEvent.inputType?.includes('delete') || false;
-    
-    let str = rawInput.trim();
-    if (str.startsWith('+1')) {
-      str = str.slice(2);
-    } else if (str.startsWith('+')) {
-      str = str.slice(1);
-    }
-    
-    let digits = str.replace(/\D/g, '');
-    if (digits.length === 11 && digits.startsWith('1')) {
-      digits = digits.slice(1);
-    }
-    
-    if (isDeleting && rawPhoneDigits && digits.length === rawPhoneDigits.length && digits.length > 0) {
-      digits = digits.slice(0, -1);
-    }
-    
-    digits = digits.slice(0, 10);
-    setRawPhoneDigits(digits);
-    
-    let formatted = '';
-    if (digits.length > 0) {
-      formatted = '+1 ';
-      if (digits.length < 3) {
-        formatted += `(${digits}`;
-      } else if (digits.length === 3) {
-        formatted += `(${digits})`;
-      } else if (digits.length <= 6) {
-        formatted += `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-      } else {
-        formatted += `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-      }
-    }
-    setPhone(formatted);
-  };
+  }, [firstName, lastName, email, zip, birthMonth, fullName, country, isUSA]);
 
   // Zipcode filter
   const handleZipInput = (e) => {
@@ -359,7 +315,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
     if (!isFormValid()) return;
 
     const data = isUSA 
-      ? { firstName, lastName, email, phone, zip, birthMonth }
+      ? { firstName, lastName, email, zip, birthMonth }
       : { fullName, email, country };
     
     onSubmit(data);
@@ -405,6 +361,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="given-name"
                     required
                   />
+                  {firstName && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setFirstName('')}
+                      aria-label="Clear First Name"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('lastName', lastName) ? 'error' : ''}`}>
                   <input 
@@ -417,6 +383,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="family-name"
                     required
                   />
+                  {lastName && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setLastName('')}
+                      aria-label="Clear Last Name"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('email', email) ? 'error' : ''}`}>
                   <input 
@@ -429,18 +405,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="email"
                     required
                   />
-                </div>
-                <div className={`input-field-wrapper ${isFieldInvalid('phone', phone) ? 'error' : ''}`}>
-                  <input 
-                    type="tel" 
-                    placeholder="*Phone Number" 
-                    value={phone} 
-                    onChange={handlePhoneInput}
-                    onBlur={() => handleBlur('phone')}
-                    name="tel"
-                    autocomplete="tel"
-                    required
-                  />
+                  {email && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setEmail('')}
+                      aria-label="Clear Email Address"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('zip', zip) ? 'error' : ''}`}>
                   <input 
@@ -453,6 +427,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="postal-code"
                     required
                   />
+                  {zip && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setZip('')}
+                      aria-label="Clear Zipcode"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`select-field-wrapper ${isFieldInvalid('birthMonth', birthMonth) ? 'error' : ''}`}>
                   <select 
@@ -484,6 +468,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="name"
                     required
                   />
+                  {fullName && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setFullName('')}
+                      aria-label="Clear Full Name"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`input-field-wrapper ${isFieldInvalid('email', email) ? 'error' : ''}`}>
                   <input 
@@ -496,6 +490,16 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     autocomplete="email"
                     required
                   />
+                  {email && (
+                    <button 
+                      type="button" 
+                      className="clear-button" 
+                      onClick={() => setEmail('')}
+                      aria-label="Clear Email Address"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
                 <div className={`select-field-wrapper ${isFieldInvalid('country', country) ? 'error' : ''}`}>
                   <select 

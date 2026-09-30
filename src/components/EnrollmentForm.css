@@ -72,7 +72,18 @@
   box-sizing: border-box;
 }
 
-.input-field-wrapper input,
+.input-field-wrapper input {
+  width: 100%;
+  padding: 20px 40px 20px 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--primary-text);
+  border: none;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
 .select-field-wrapper select {
   width: 100%;
   padding: 20px 12px;
@@ -83,16 +94,42 @@
   background: transparent;
   outline: none;
   box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
 }
 
 .input-field-wrapper input::placeholder {
   color: var(--secondary-text);
 }
 
-.select-field-wrapper select {
-  appearance: none;
-  -webkit-appearance: none;
+.clear-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 2;
+}
+
+.clear-button:hover {
+  background-color: #9ca3af;
+}
+
+.clear-button:active {
+  transform: translateY(-50%) scale(0.9);
 }
 
 .select-caret {

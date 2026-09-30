@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WelcomeScreen from './components/WelcomeScreen';
 import TransitionScreen from './components/TransitionScreen';
-import RegionSelect from './components/RegionSelect';
+import PhoneInputScreen from './components/PhoneInputScreen';
 import EnrollmentForm from './components/EnrollmentForm';
 import LoadingScreen from './components/LoadingScreen';
 import SuccessScreen from './components/SuccessScreen';
@@ -14,6 +14,7 @@ export default function App() {
   const [startTime, setStartTime] = useState(null);
   const [completionTime, setCompletionTime] = useState(null);
   const [region, setRegion] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [formData, setFormData] = useState({});
   const [surveyData, setSurveyData] = useState({});
   const [fieldsFilledCount, setFieldsFilledCount] = useState(0);
@@ -81,6 +82,7 @@ export default function App() {
   const handleReset = () => {
     setStep(1);
     setRegion('');
+    setPhoneNumber('');
     setFormData({});
     setSurveyData({});
     setFieldsFilledCount(0);
@@ -92,10 +94,10 @@ export default function App() {
   const getProgress = () => {
     if (step === 1 || step === 'transition') return 0;
     if (step === 2) {
-      return region ? 18 : 10;
+      return phoneNumber ? 20 : 10;
     }
     if (step === 3) {
-      const increment = region === 'USA' ? 11.66 : 23.33;
+      const increment = region === 'USA' ? 14 : 23.33;
       return Math.min(30 + Math.round(fieldsFilledCount * increment), 100);
     }
     // Final stages sit at 100%
@@ -111,14 +113,24 @@ export default function App() {
         return <TransitionScreen onComplete={() => setStep(2)} />;
       case 2:
         return (
-          <RegionSelect
-            selectedRegion={region}
-            onSelectRegion={(reg) => {
-              setRegion(reg);
-              setFieldsFilledCount(0); // Reset filled count on region swap
+          <PhoneInputScreen
+            initialPhone={phoneNumber}
+            onContinueUS={(phoneVal) => {
+              setRegion('USA');
+              setPhoneNumber(phoneVal);
+              setFieldsFilledCount(0);
+              navigateWithDelay(3);
             }}
-            onBack={() => navigateWithDelay(1, () => setRegion(''))}
-            onContinue={() => navigateWithDelay(3)}
+            onContinueInternational={() => {
+              setRegion('International');
+              setPhoneNumber('');
+              setFieldsFilledCount(0);
+              navigateWithDelay(3);
+            }}
+            onBack={() => navigateWithDelay(1, () => {
+              setRegion('');
+              setPhoneNumber('');
+            })}
             progress={getProgress()}
           />
         );
@@ -128,7 +140,8 @@ export default function App() {
             region={region}
             onBack={() => navigateWithDelay(2)}
             onSubmit={(data) => {
-              setFormData(data);
+              const finalData = { ...data, phone: phoneNumber || 'N/A' };
+              setFormData(finalData);
               navigateWithDelay(4);
             }}
             onFieldsChange={(count) => setFieldsFilledCount(count)}

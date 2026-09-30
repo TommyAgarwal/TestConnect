@@ -565,13 +565,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
         </div>
 
         {/* Footer Actions */}
-        <div 
-          className="enrollment-footer reveal-in" 
-          style={{ 
-            '--delay': '650ms',
-            transform: keyboardOffset > 0 ? `translateY(-${keyboardOffset}px)` : undefined 
-          }}
-        >
+        <div className="enrollment-footer reveal-in" style={{ '--delay': '650ms' }}>
           <p className="disclaimer-text">
             This information will not be used or stored
           </p>

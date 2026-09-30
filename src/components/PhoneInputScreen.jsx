@@ -166,13 +166,7 @@ export default function PhoneInputScreen({
       </div>
 
       {/* Footer CTA */}
-      <div 
-        className="phone-footer reveal-in" 
-        style={{ 
-          '--delay': '700ms',
-          transform: keyboardOffset > 0 ? `translateY(-${keyboardOffset}px)` : undefined
-        }}
-      >
+      <div className="phone-footer reveal-in" style={{ '--delay': '700ms' }}>
         <button 
           type="button"
           className={`btn-primary continue-button ${isContinueEnabled ? 'active' : 'disabled'}`}

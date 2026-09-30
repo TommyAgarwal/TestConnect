@@ -18,6 +18,30 @@ export default function PhoneInputScreen({
 }) {
   const [phone, setPhone] = useState(initialPhone);
   const [rawDigits, setRawDigits] = useState(() => initialPhone.replace(/\D/g, '').replace(/^1/, ''));
+  const [isFocused, setIsFocused] = useState(false);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
+
+  // Responsive CTA positioning when soft keyboard is active on mobile
+  React.useEffect(() => {
+    if (!window.visualViewport) return;
+
+    const handleViewportChange = () => {
+      const vv = window.visualViewport;
+      const diff = window.innerHeight - vv.height;
+      if (diff > 100) {
+        setKeyboardOffset(diff);
+      } else {
+        setKeyboardOffset(0);
+      }
+    };
+
+    window.visualViewport.addEventListener('resize', handleViewportChange);
+    window.visualViewport.addEventListener('scroll', handleViewportChange);
+    return () => {
+      window.visualViewport.removeEventListener('resize', handleViewportChange);
+      window.visualViewport.removeEventListener('scroll', handleViewportChange);
+    };
+  }, []);
 
   const handlePhoneChange = (e) => {
     const rawInput = e.target.value;
@@ -111,13 +135,16 @@ export default function PhoneInputScreen({
               placeholder="(555) 000-0000"
               value={phone}
               onChange={handlePhoneChange}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               name="tel"
               autocomplete="tel-national"
             />
-            {phone && (
+            {isFocused && phone && (
               <button 
                 type="button" 
                 className="clear-button" 
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={handleClear}
                 aria-label="Clear phone number"
               >
@@ -139,7 +166,13 @@ export default function PhoneInputScreen({
       </div>
 
       {/* Footer CTA */}
-      <div className="phone-footer reveal-in" style={{ '--delay': '700ms' }}>
+      <div 
+        className="phone-footer reveal-in" 
+        style={{ 
+          '--delay': '700ms',
+          transform: keyboardOffset > 0 ? `translateY(-${keyboardOffset}px)` : undefined
+        }}
+      >
         <button 
           type="button"
           className={`btn-primary continue-button ${isContinueEnabled ? 'active' : 'disabled'}`}

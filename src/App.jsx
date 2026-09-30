@@ -27,13 +27,23 @@ export default function App() {
     }, 180);
   };
 
-  // Reset scroll position on step change
+  // Reset scroll position and update theme background color on step change
   React.useEffect(() => {
     window.scrollTo(0, 0);
     const scrollContainers = document.querySelectorAll('.screen-transition');
     scrollContainers.forEach(el => {
       el.scrollTop = 0;
     });
+
+    const themeMeta = document.getElementById('theme-color-meta');
+    const isDarkTransition = step === 'transition';
+    const activeColor = isDarkTransition ? '#041e3a' : '#f2f3f5';
+
+    document.documentElement.style.backgroundColor = activeColor;
+    document.body.style.backgroundColor = activeColor;
+    if (themeMeta) {
+      themeMeta.setAttribute('content', activeColor);
+    }
   }, [step]);
 
   // Start timer and move to the intermediate Transition Screen

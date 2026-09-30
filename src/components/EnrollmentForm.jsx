@@ -235,7 +235,30 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
 
   // Touched state for onBlur validation
   const [touched, setTouched] = useState({});
-  const [rawPhoneDigits, setRawPhoneDigits] = useState('');
+  const [focusedField, setFocusedField] = useState(null);
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
+
+  // Listen to soft keyboard appearance on mobile
+  useEffect(() => {
+    if (!window.visualViewport) return;
+
+    const handleViewportChange = () => {
+      const vv = window.visualViewport;
+      const diff = window.innerHeight - vv.height;
+      if (diff > 100) {
+        setKeyboardOffset(diff);
+      } else {
+        setKeyboardOffset(0);
+      }
+    };
+
+    window.visualViewport.addEventListener('resize', handleViewportChange);
+    window.visualViewport.addEventListener('scroll', handleViewportChange);
+    return () => {
+      window.visualViewport.removeEventListener('resize', handleViewportChange);
+      window.visualViewport.removeEventListener('scroll', handleViewportChange);
+    };
+  }, []);
 
   // Strict email regex validation
   const isEmailValid = (val) => {
@@ -284,6 +307,11 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
 
   const handleBlur = (field) => {
     setTouched(prev => ({ ...prev, [field]: true }));
+    setFocusedField(null);
+  };
+
+  const handleFocus = (field) => {
+    setFocusedField(field);
   };
 
   // Update parent on fields progress changes (USA has 5 fields, Intl has 3)
@@ -356,15 +384,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*First Name" 
                     value={firstName} 
                     onChange={(e) => setFirstName(e.target.value)}
+                    onFocus={() => handleFocus('firstName')}
                     onBlur={() => handleBlur('firstName')}
                     name="given-name"
                     autocomplete="given-name"
                     required
                   />
-                  {firstName && (
+                  {focusedField === 'firstName' && firstName && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setFirstName('')}
                       aria-label="Clear First Name"
                     >
@@ -378,15 +408,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*Last Name" 
                     value={lastName} 
                     onChange={(e) => setLastName(e.target.value)}
+                    onFocus={() => handleFocus('lastName')}
                     onBlur={() => handleBlur('lastName')}
                     name="family-name"
                     autocomplete="family-name"
                     required
                   />
-                  {lastName && (
+                  {focusedField === 'lastName' && lastName && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setLastName('')}
                       aria-label="Clear Last Name"
                     >
@@ -400,15 +432,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*Email Address" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => handleFocus('email')}
                     onBlur={() => handleBlur('email')}
                     name="email"
                     autocomplete="email"
                     required
                   />
-                  {email && (
+                  {focusedField === 'email' && email && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setEmail('')}
                       aria-label="Clear Email Address"
                     >
@@ -422,15 +456,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*Zipcode" 
                     value={zip} 
                     onChange={handleZipInput}
+                    onFocus={() => handleFocus('zip')}
                     onBlur={() => handleBlur('zip')}
                     name="postal-code"
                     autocomplete="postal-code"
                     required
                   />
-                  {zip && (
+                  {focusedField === 'zip' && zip && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setZip('')}
                       aria-label="Clear Zipcode"
                     >
@@ -442,6 +478,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                   <select 
                     value={birthMonth} 
                     onChange={(e) => setBirthMonth(e.target.value)}
+                    onFocus={() => handleFocus('birthMonth')}
                     onBlur={() => handleBlur('birthMonth')}
                     name="bday-month"
                     autocomplete="bday-month"
@@ -463,15 +500,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*Full Name" 
                     value={fullName} 
                     onChange={(e) => setFullName(e.target.value)}
+                    onFocus={() => handleFocus('fullName')}
                     onBlur={() => handleBlur('fullName')}
                     name="name"
                     autocomplete="name"
                     required
                   />
-                  {fullName && (
+                  {focusedField === 'fullName' && fullName && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setFullName('')}
                       aria-label="Clear Full Name"
                     >
@@ -485,15 +524,17 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                     placeholder="*Email Address" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => handleFocus('email')}
                     onBlur={() => handleBlur('email')}
                     name="email"
                     autocomplete="email"
                     required
                   />
-                  {email && (
+                  {focusedField === 'email' && email && (
                     <button 
                       type="button" 
                       className="clear-button" 
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => setEmail('')}
                       aria-label="Clear Email Address"
                     >
@@ -505,6 +546,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
                   <select 
                     value={country} 
                     onChange={(e) => setCountry(e.target.value)}
+                    onFocus={() => handleFocus('country')}
                     onBlur={() => handleBlur('country')}
                     name="country"
                     autocomplete="country-name"
@@ -523,7 +565,13 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
         </div>
 
         {/* Footer Actions */}
-        <div className="enrollment-footer reveal-in" style={{ '--delay': '650ms' }}>
+        <div 
+          className="enrollment-footer reveal-in" 
+          style={{ 
+            '--delay': '650ms',
+            transform: keyboardOffset > 0 ? `translateY(-${keyboardOffset}px)` : undefined 
+          }}
+        >
           <p className="disclaimer-text">
             This information will not be used or stored
           </p>

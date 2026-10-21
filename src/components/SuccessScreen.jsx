@@ -26,7 +26,7 @@ export default function SuccessScreen({ onComplete }) {
           <div className="coupon-brand-group" data-node-id="4:3450">
             <span className="coupon-welcome" data-node-id="4:3451">Welcome to</span>
             <div className="coupon-logo-box" data-node-id="4:3452">
-              <span className="coupon-logo-text" data-node-id="4:3453">TEST CONNECT</span>
+              <span className="coupon-logo-text" data-node-id="4:3453">POLO CONNECT</span>
             </div>
           </div>
           

@@ -22,7 +22,7 @@ export default function TransitionScreen({ onComplete }) {
         </p>
         <div className="transition-brand-border reveal-in" style={{ '--delay': '400ms' }} data-node-id="1:18">
           <p className="transition-brand-text" data-node-id="1:19">
-            TEST CONNECT
+            POLO CONNECT
           </p>
         </div>
       </div>

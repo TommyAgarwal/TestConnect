@@ -13,7 +13,7 @@ export default function WelcomeScreen({ onStart }) {
           </h1>
           <p className="welcome-subtitle" data-node-id="4:3784">
             <SplitText 
-              text="In this session, you will simulate a sign up for Polo Connect, a fictional customer loyalty program for a retail brand." 
+              text="In this session, you will simulate a sign up for Test Connect, a fictional customer loyalty program for a retail brand." 
               delay={200}
               wordDelayMultiplier={30}
             />

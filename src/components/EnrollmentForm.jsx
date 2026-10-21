@@ -371,7 +371,7 @@ export default function EnrollmentForm({ region, onBack, onSubmit, onFieldsChang
               <SplitText text="Tell us about yourself" delay={100} />
             </h1>
             <p className="enrollment-subtitle reveal-in" style={{ '--delay': '200ms' }}>
-              Enter your information to receive exclusive offers, early access to new arrivals, a birthday surprise, and more from Polo Connect
+              Enter your information to receive exclusive offers, early access to new arrivals, a birthday surprise, and more from Test Connect
             </p>
           </div>
 
